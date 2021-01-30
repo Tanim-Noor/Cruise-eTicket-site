@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cruise Booking</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!--Header and Menu Section-->
+    <header class="container">
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a class="active" href="#">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!--Booking Section-->
+    <main class="main-content container">
+
+        <div class="booking-content">
+            <h1>Cruise Queen</h1>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book./p>
+        </div>
+
+
+        <div class="booking-form">
+            <h3>Book Ocean Time</h3>
+            <div class="input-group">
+                <label for="">Flying From</label>
+                <input class="inp-style" type="text" name="" placeholder="Dhaka, Bangladesh">
+            </div>
+            <div class="input-group">
+                <label for="">Flying To</label>
+                <input class="inp-style" type="text" name="" placeholder="New York, United States">
+            </div>
+            <div class="inputs">
+                <div class="input-group">
+                    <label" for="">Departure</label>
+                    <input class="inp-style" type="date" name="">
+                </div>
+                <div class="input-group">
+                    <label for="">Return</label>
+                    <input class="inp-style" type="date" name="">
+                </div>
+            </div>
+            <div class="input-group f-class">
+                <div>
+                    <label for="">First Class (<span id="fClassTotal"> $150 </span>) </label>
+                    <input id="fClassCount" class="inp-style inp-width" value="1">
+                </div>
+                <div class="plus-minus-btn">
+                    <p> <span id="firstIncrease">+</span> <span id="firstDecrease">-</span> </p>
+                </div>
+            </div>
+            
+            <div class="input-group f-class">
+                <div>
+                    <label for="">Economy (<span id="eClassTotal"> $100 </span>)</label>
+                    <input id="eClassCount" class="inp-style inp-width" value="1">
+                </div>
+                <div class="plus-minus-btn">
+                    <p> <span id="secondIncrease">+</span> <span id="secondDecrease">-</span> </p>
+                </div>
+            </div>
+            <div class="calculations">
+                <div class="amount">
+                    <div class="left">
+                        <p>Subtotal</p>
+                    </div>
+                    <div class="right">
+                        <p id="totalCost">$500</p>
+                    </div>
+                </div>
+
+                <div class="amount">
+                    <div class="left">
+                        <p>Charge 10% VAT</p>
+                    </div>
+                    <div class="right">
+                        <p id="taxAmount">$50</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="amount">
+                    <div class="left">
+                        <h4>Total</h4>
+                    </div>
+                    <div class="right">
+                        <p id="grandTotal">$550</p>
+                    </div>
+                </div>
+            </div>
+            <button class="btn-style">Book Now</button>
+        </div>
+    </main>
+    <script>
+
+
+        // firstClassBookingSection
+       document.getElementById('firstIncrease').addEventListener('click', function(){
+           const firstClassInput = document.getElementById('fClassCount');
+           const fClassCount = parseInt(firstClassInput.value);
+           const fClassNewCount = fClassCount + 1 ;
+           firstClassInput.value = fClassNewCount ;
+           const fClassTotal = fClassNewCount * 150 ;
+           document.getElementById("fClassTotal").innerText = "$" + fClassTotal;
+           calculateTotal()
+        })
+
+        document.getElementById("firstDecrease").addEventListener('click', function(){
+           const firstClassInput = document.getElementById('fClassCount');
+           const fClassCount = parseInt(firstClassInput.value);
+           let fClassNewCount = fClassCount ;
+           if (fClassCount > 0){
+           fClassNewCount = fClassCount - 1;}
+           firstClassInput.value = fClassNewCount ;
+           const fClassTotal = fClassNewCount * 150 ;
+           fClassNewCount * 150 ;
+           document.getElementById("fClassTotal").innerText = "$" + fClassTotal;
+           calculateTotal()
+        });
+
+        // economyClassBookingSection
+        document.getElementById('secondIncrease').addEventListener('click', function(){
+           const eClassInput = document.getElementById('eClassCount');
+           const eClassCount = parseInt(eClassInput.value);
+           const eClassNewCount = eClassCount + 1 ;
+           eClassInput.value = eClassNewCount ;
+           const eClassTotal = eClassNewCount * 100 ;
+           document.getElementById("eClassTotal").innerText = "$" + eClassTotal;
+           calculateTotal()
+        })
+
+        document.getElementById("secondDecrease").addEventListener('click', function(){
+            const eClassInput = document.getElementById('eClassCount');
+           const eClassCount = parseInt(eClassInput.value);
+           let eClassNewCount = eClassCount ;
+           if (eClassCount > 0){
+           eClassNewCount = eClassCount - 1;}
+           eClassInput.value = eClassNewCount ;
+           const eClassTotal = eClassNewCount * 100 ;
+           eClassNewCount * 100 ;
+           document.getElementById("eClassTotal").innerText = "$" + eClassTotal;
+           calculateTotal()
+        });
+
+        // totalCalculationSection
+        function calculateTotal(){
+            const firstClassInput = document.getElementById('fClassCount');
+           const fClassCount = parseInt(firstClassInput.value);
+
+           const eClassInput = document.getElementById('eClassCount');
+           const eClassCount = parseInt(eClassInput.value);
+            const totalTicketCost = fClassCount * 150 + eClassCount * 100;
+            document.getElementById("totalCost").innerText= "$" + totalTicketCost;
+
+            const tax = totalTicketCost * 0.1;
+            document.getElementById("taxAmount").innerText = "$" + tax;
+
+            const grandTotal = totalTicketCost + tax;
+            document.getElementById("grandTotal").innerText= "$" + grandTotal; 
+        
+        }
+    </script>
+
+    <!--Thank You-->
+</body>
+
+</html>
